@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="ulogin_no_connection">Перевірте налаштування підключення до мережі</string>
+    <string name="ulogin_select_provider">Виберіть спосіб входу</string>
+    <string name="ulogin_authorize">Введіть свої облікові дані</string>
+
+    <string-array name="ulogin_provider_names">
+        <item>ВКонтакте</item>
+        <item>Одноклассники</item>
+        <item>Mail.ru</item>
+        <item>Facebook</item>
+        <item>Twitter</item>
+        <item>Google</item>
+        <item>Яндекс</item>
+        <item>Живой Журнал</item>
+        <item>OpenID</item>
+        <item>Flickr</item>
+        <item>Last.FM</item>
+        <item>LinkedIn</item>
+        <item>Live ID</item>
+        <item>SoundCloud</item>
+        <item>Steam</item>
+        <item>uID</item>
+        <item>WebMoney</item>
+        <item>YouTube</item>
+        <item>foursquare</item>
+        <item>tumblr</item>
+        <item>Google+</item>
+        <item>dudu</item>
+        <item>Vimeo</item>
+        <item>Instagram</item>
+    </string-array>
+
+</resources>

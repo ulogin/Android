@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="ulogin_no_connection">Check your device network settings</string>
+    <string name="ulogin_select_provider">Select the authentication method</string>
+    <string name="ulogin_authorize">Enter your credentials</string>
+
+    <string-array name="ulogin_provider_names">
+        <item>VK</item>
+        <item>Odnoklassniki</item>
+        <item>Mail.ru</item>
+        <item>Facebook</item>
+        <item>Twitter</item>
+        <item>Google</item>
+        <item>Yandex</item>
+        <item>Live Journal</item>
+        <item>OpenID</item>
+        <item>Flickr</item>
+        <item>Last.FM</item>
+        <item>LinkedIn</item>
+        <item>Live ID</item>
+        <item>SoundCloud</item>
+        <item>Steam</item>
+        <item>uID</item>
+        <item>WebMoney</item>
+        <item>YouTube</item>
+        <item>foursquare</item>
+        <item>tumblr</item>
+        <item>Google+</item>
+        <item>dudu</item>
+        <item>Vimeo</item>
+        <item>Instagram</item>
+    </string-array>
+
+</resources>

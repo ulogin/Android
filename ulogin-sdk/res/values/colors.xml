@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="ulogin_green">#669900</color>
+    <color name="ulogin_green_selector">#81aa30</color>
+    <color name="ulogin_provider_background">#eeeeee</color>
+    <color name="ulogin_provider_diviter">#d9d9d9</color>
+    <color name="ulogin_header_background">#669900</color>
+    <color name="ulogin_header_divider">#527a00</color>
+    <color name="ulogin_provider_press">#8ebc37</color>
+
+</resources>
