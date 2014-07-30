@@ -18,6 +18,7 @@ Android SDK
 *	SDK предназначена для интеграции в Android-приложения разработчиками мобильных приложений.
 *	Поддерживаются все социальные сети, реализуемые uLogin.
 *	Текущая online-версия этого документа: http://ulogin.ru/help.php#androidsdk
+*	Скачать Android SDK можно по ссылке https://github.com/ulogin/Android/archive/master.zip
 
 
 
@@ -114,6 +115,22 @@ intent.putExtra(
 intent.putExtra(
 	UloginAuthActivity.OPTIONAL,
 	new ArrayList(new String[]{"nickname","photo"})
+);
+```
+
+*	идентификатор приложения. По умолчанию не задан. Пример:
+```java
+intent.putExtra(
+	UloginAuthActivity.APPLICATION_ID,
+	"xxxxxx"
+);
+```
+
+*	секретный ключ приложения. По умолчанию не задан. Пример:
+```java
+intent.putExtra(
+	UloginAuthActivity.SECRET_KEY,
+	"xxxxxx"
 );
 ```
 
