@@ -18,7 +18,7 @@ Android Studio SDK
 *	SDK предназначена для интеграции в Android-приложения разработчиками мобильных приложений.
 *	Поддерживаются все социальные сети, реализуемые uLogin.
 *	Текущая online-версия этого документа: http://ulogin.ru/help.php#androidstudiosdk
-*	Скачать Android SDK можно здесь https://github.com/ulogin/Android/
+*	Скачать Android SDK можно здесь https://github.com/ulogin/Android/tree/AndroidStudio/
 
 
 
