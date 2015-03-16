@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <string name="ulogin_no_connection">Vérifiez la connexion réseau</string>
-    <string name="ulogin_select_provider">Sélectionnez la méthode d\'entrée</string>
-    <string name="ulogin_authorize">Entrez vos informations</string>
-
-</resources>

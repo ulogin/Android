@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <string name="custom_auth_button">Кастомная кнопка ВК</string>
-    <string name="button_auth">Единая кнопка авторизации</string>
-
-</resources>

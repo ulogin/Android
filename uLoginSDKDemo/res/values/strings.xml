@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <string name="app_name">uLogin SDK Demo</string>
-    <string name="custom_auth_button">Custom auth button</string>
-    <string name="button_auth">Auth button</string>
-
-</resources>

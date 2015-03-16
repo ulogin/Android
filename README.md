@@ -1,7 +1,7 @@
 
 
 
-Android SDK
+Android Studio SDK
 ==================
 
     
@@ -17,26 +17,9 @@ Android SDK
 *	Локализации: русская, украинская, английская, французская, немецкая.
 *	SDK предназначена для интеграции в Android-приложения разработчиками мобильных приложений.
 *	Поддерживаются все социальные сети, реализуемые uLogin.
-*	Текущая online-версия этого документа: http://ulogin.ru/help.php#androidsdk
-*	Скачать Android SDK можно по ссылке https://github.com/ulogin/Android/archive/master.zip
+*	Текущая online-версия этого документа: http://ulogin.ru/help.php#androidstudiosdk
+*	Скачать Android SDK можно здесь https://github.com/ulogin/Android/
 
-
-
-
-Добавление библиотеки в рабочее пространство
-==================
-
-
-Для добавления библиотеки в ваш проект в среде **Eclipse** откройте мастер создания проектов (File->New->Project...), выберите в нём пункт **Android Project from Existing Code**, нажмите **Next**.
-
-
-
-
-В поле **Root Directory** укажите путь к библиотеке **uLogin SDK**, отметьте флажок **Copy projects into workspace**, нажмите **Finish**. Библиотека **uLogin SDK** появится в вашем текущем рабочем пространстве.
-
-
-
-Теперь можно обычным способом создавать android-приложение.
 
 
 
@@ -45,9 +28,66 @@ Android SDK
 ==================
 
 
-Для того, чтобы использовать **uLogin SDK** в вашем приложении, откройте окно свойств проекта и на странице **Android** добавьте библиотеку: нажмите кнопку **Add** и выберите в появившемся окне **ulogin-sdk**. Сохраните свойства проекта, нажав **OK** необходимое количество раз.
+Для добавления библиотеки в ваш проект в среде **Android Studio** скопируйте файл **ulogin-sdk-vXX.aar** в каталог **libs** внутри дерева вашего проекта.
+Например, в demo-приложении он находится в **UloginSDKDemo/app/libs/ulogin-sdk-v1.1.aar**.
+
+Для того, чтобы **Gradle** начал использовать **uLogin SDK**, откройте скрипт сборки вашего приложения **build.gradle** и добавьте туда следующие строки:
+
+```java
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+```
 
 
+Кроме того, добавьте библиотеку в зависимости в блок dependencies:
+
+```java
+compile(name:'ulogin-sdk-v1.1', ext:'aar')
+
+```
+
+
+Общий вид скрипта сборки получится примерно таким:
+
+
+```java
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "21.1.2"
+
+    defaultConfig {
+        applicationId "ru.ulogin.uloginsdkdemo"
+        minSdkVersion 8
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile(name:'ulogin-sdk-v1.1', ext:'aar')
+}
+
+```
 
 
 
@@ -66,7 +106,7 @@ Android SDK
 Вторая - внутри тега application, объявление Activity для uLogin SDK:
 
 ```java
-<activity android:name="com.ulogin.sdk.UloginAuthActivity"
+<activity android:name="ru.ulogin.sdk.UloginAuthActivity"
             android:configChanges="orientation|screenSize" />
 ```
 
@@ -118,7 +158,7 @@ intent.putExtra(
 );
 ```
 
-*	идентификатор приложения. По умолчанию не задан. Пример:
+*	идентификатор приложения. Необходим только в случае, если вы используете своё приложение для авторизации. По умолчанию не задан. Пример:
 ```java
 intent.putExtra(
 	UloginAuthActivity.APPLICATION_ID,
@@ -126,7 +166,7 @@ intent.putExtra(
 );
 ```
 
-*	секретный ключ приложения. По умолчанию не задан. Пример:
+*	секретный ключ приложения. Необходим только в случае, если вы используете своё приложение для авторизации. По умолчанию не задан. Пример:
 ```java
 intent.putExtra(
 	UloginAuthActivity.SECRET_KEY,
@@ -136,7 +176,8 @@ intent.putExtra(
 
 
 
-Если параметр не задан, используется значение по умолчанию. Теперь **Intent** может быть запущен.
+
+Если какой-либо из параметров не задан, используется значение по умолчанию. Теперь **Intent** может быть запущен.
 
 
 
@@ -145,34 +186,37 @@ intent.putExtra(
 
 ```java
 
-Intent intent = new Intent(getApplicationContext(),UloginAuthActivity.class);
+public final int REQUEST_ULOGIN = 1; //можно задать константе любое другое значение
 
-String[] providers			= getResources().getStringArray(R.array.ulogin_providers);
-String[] mandatory_fields	= new String[] {"first_name", "last_name" };
-String[] optional_fields		= new String[] {"nickname","photo"};
+public void runUlogin() {
+	Intent intent = new Intent(getApplicationContext(),UloginAuthActivity.class);
 
-intent.putExtra(
-	UloginAuthActivity.PROVIDERS,
-	new ArrayList(Arrays.asList(providers))
-	);
-intent.putExtra(
-	UloginAuthActivity.FIELDS,
-	new ArrayList(Arrays.asList(mandatory_fields))
-	);
-intent.putExtra(
-	UloginAuthActivity.OPTIONAL,
-	new ArrayList(Arrays.asList(optional_fields))
-	);
+	String[] providers		= getResources().getStringArray(ru.ulogin.sdk.R.array.ulogin_providers);
+	String[] mandatory_fields	= new String[] {"first_name", "last_name" };
+	String[] optional_fields	= new String[] {"nickname","photo"};
 
-// вместо числа 1 следует использовать какую-либо заранее объявленную константу
-startActivityForResult(intent, 1);
+	intent.putExtra(
+		UloginAuthActivity.PROVIDERS,
+		new ArrayList(Arrays.asList(providers))
+		);
+	intent.putExtra(
+		UloginAuthActivity.FIELDS,
+		new ArrayList(Arrays.asList(mandatory_fields))
+		);
+	intent.putExtra(
+		UloginAuthActivity.OPTIONAL,
+		new ArrayList(Arrays.asList(optional_fields))
+		);
+
+	startActivityForResult(intent, REQUEST_ULOGIN);
+}
 
 ```
 
 
 
-*	**R.array.ulogin_providers**	- список всех известных провайдеров;
-*	**R.array.ulogin_fields**	- список всех известных полей.
+*	**ru.ulogin.sdk.R.array.ulogin_providers**	- список всех известных провайдеров;
+*	**ru.ulogin.sdk.R.array.ulogin_fields**	- список всех известных полей.
 
 
 Если в параметре PROVIDERS было передано несколько названий социальных сетей, то появится экран с возможностью выбора одной из них. Если же передано только одно название,
@@ -223,7 +267,7 @@ HashMap userdata = (HashMap) intent.getSerializableExtra(UloginAuthActivity.USER
 protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
 	// requestCode должно сравниваться со значением константы,
 	//   указанной при инициализации Intent
-	if (requestCode == 1) {
+	if (requestCode == REQUEST_ULOGIN) {
 		//получаем данные ответа:
 		HashMap userdata =
 			(HashMap) intent.getSerializableExtra (UloginAuthActivity.USERDATA);
@@ -255,4 +299,3 @@ protected void onActivityResult(int requestCode, int resultCode, Intent intent) 
 
 
 Пример готового приложения можно посмотреть в архиве с **uLogin SDK** в каталоге **uLoginSDKDemo**.
-
